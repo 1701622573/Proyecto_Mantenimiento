@@ -1,95 +1,134 @@
+"""
+node class
+"""
 class TSTNode:
-    #constructor: this method receives the key, the value, the left node, the right node and the parent node
-    def __init__(self, id, name, party, x = 0, y = 0, leftChild=None, middleChild=None, rightChild=None, parentNode=None):
-        self.id = id
+    """
+    TST node
+    """
+    #constructor: this method receives the key, the value, the left node,
+    # the right node and the parent node
+    def __init__(self, id_node, name, party, x = 0, y = 0, left_child=None, middle_child=None,
+                right_child=None, parent_node=None):
+        self.id = id_node
         self.name = name
         self.party = party
-        self.leftChild = leftChild
-        self.middleChild = middleChild
-        self.rightChild = rightChild
-        self.parentNode = parentNode
+        self.left_child = left_child
+        self.middle_child = middle_child
+        self.right_child = right_child
+        self.parent_node = parent_node
         self.x = x
         self.y = y
 
+    def has_parent_node(self):
+        """
+        has parent node
+        """
+        return self.parent_node
 
-    def hasParentNode(self):
-        return self.parentNode
+    def has_left_child(self):
+        """
+        This method verifies if the current node has a child node on the left
+        """
+        return self.left_child
 
-    #This method verifies if the current node has a child node on the left
-    def hasLeftChild(self):
-        return self.leftChild
-    
-    #This method verifies if the current node has a child node on the middle
-    def hasMiddleChild(self):
-        return self.middleChild
-    
-    #This method verifies if the current node has a child node on the right
-    def hasRightChild(self):
-        return self.rightChild
+    def has_middle_child(self):
+        """
+        This method verifies if the current node has a child node on the middle
+        """
+        return self.middle_child
 
-    def getNumChilds(self):
+    def has_right_child(self):
+        """
+        This method verifies if the current node has a child node on the right
+        """
+        return self.right_child
+
+    def get_num_childs(self):
+        """
+        get number childs
+        """
         num=0
-        if(self.leftChild):
+        if self.left_child:
             num += 1
-        if(self.middleChild):
+        if self.middle_child:
             num += 1
-        if(self.rightChild):
+        if self.right_child:
             num += 1
         return num
 
-    def whatChildIs(self,sonID):
+    def what_child_is(self,son_id):
+        """
+        helps to know if child
+        """
         pos=None
-        if(sonID == self.leftChild.id):
+        if son_id == self.left_child.id:
             print("ES HIJO IZQUIERDO")
             pos=0
             return pos
-        if(sonID == self.middleChild.id):
+        if son_id == self.middle_child.id:
             print("ES HIJO MEDIO")
             pos=0
             return pos
-        if(sonID == self.rightChild.id):
+        if son_id == self.right_child.id:
             print("ES HIJO DERECHO")
             pos=0
             return pos
-    
-    #This method verifies if self node is left child of other one
-    def isLeftChild(self):
-        return self.parentNode and self.parentNode.leftChild == self
-    
-    #This method verifies if self node is middle child of other one
-    def isMiddleChild(self):
-        return self.parentNode and self.parentNode.middleChild == self
-    
-    #This method verifies if self node is right child of other one
-    def isRightChild(self):
-        return self.parentNode and self.parentNode.rightChild == self
-    
-    #This method verifies if self node is lthe main root of the tree
-    def isRoot(self):
-        return not self.parentNode
-    
-    #This method verifies if self node is a leaf
-    def isLeaf(self):
-        return not (self.leftChild or self.rightChild or self.middleChild)
-    
-    #This method verifies if self node has at least one child
-    def hasSomeChild(self):
-        return (self.rightChild or self.leftChild or self.middleChild)
-    
-     #This method verifies if self node has both children
-    def hasAllChilds(self):
-        return (self.rightChild and self.leftChild and self.middleChild)
-    
-    #This method update the node information (key, value and children)
-    def updateNodeInformation(self, key, name, leftChild, middleChild, rightChild):
+        return pos
+
+    def is_left_child(self):
+        """
+        This method verifies if self node is left child of other one
+        """
+        return self.parent_node and self.parent_node.leftChild == self
+
+    def is_middle_child(self):
+        """
+        This method verifies if self node is middle child of other one
+        """
+        return self.parent_node and self.parent_node.middleChild == self
+
+    def is_right_child(self):
+        """
+        This method verifies if self node is right child of other one
+        """
+        return self.parent_node and self.parent_node.rightChild == self
+
+    def is_root(self):
+        """
+        This method verifies if self node is lthe main root of the tree
+        """
+        return not self.parent_node
+
+    def is_leaf(self):
+        """
+        This method verifies if self node is a leaf
+        """
+        return not (self.left_child or self.right_child or self.middle_child)
+
+    def has_some_child(self):
+        """
+        This method verifies if self node has at least one child
+        """
+        return (self.right_child or self.left_child or self.middle_child)
+
+    def has_all_childs(self):
+        """
+        This method verifies if self node has both children
+        """
+        return (self.right_child and self.left_child and self.middle_child)
+
+    def update_node_information(self, key, name, left_child, middle_child, right_child):
+        """
+        #This method update the node information (key, value and children)
+        """
         self.key = key
         self.name = name
-        self.leftChild = leftChild
-        self.middleChild = middleChild
-        self.rightChild = rightChild
-        if(self.hasRightChild()):
-            self.rightChild.parentNode = self
-        if(self.hasMiddleChild()):
-            self.middleChild.parentNode = self
-        if(self.hasLeftChild()):
-            self.leftChild.parentNode = self
+        self.left_child = left_child
+        self.middle_child = middle_child
+        self.right_child = right_child
+        if self.has_right_child():
+            self.right_child.parentNode = self
+        if self.has_middle_child():
+            self.middle_child.parentNode = self
+        if self.has_left_child():
+            self.left_child.parentNode = self

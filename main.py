@@ -1,60 +1,71 @@
+"""
+Main Class
+"""
 import json
-from TernarySearchTree import TST
+from ternary_search_tree import TST
 
 myTree = TST()
-#Load the file and show it
-def cargarDatos(ruta):
-    with open(ruta) as contenido:
+def cargar_datos(ruta):
+    """
+    Load the file and show it
+    """
+    with open(ruta, encoding='UTF-8') as contenido:
         estruc = json.load(contenido)
-        buscarHijos(estruc)
-                    
-def buscarHijos(estr):
+        buscar_hijos(estruc)
+
+def buscar_hijos(estr):
+    """
+    Busca los hijos de un nodo en especifico
+    """
     for pers in estr.get('people'):
         print(pers.get('id'), pers.get('name'))
-        myTree.addNode(pers.get('id'), pers.get('name'), pers.get('party'), 0) #NUEVA
-        _buscarHijos(pers)
-        
-def _buscarHijos(padre):
+        myTree.add_node(pers.get('id'), pers.get('name'), pers.get('party'), 0) #NUEVA
+        _buscar_hijos(pers)
+
+
+def _buscar_hijos(padre):
+    """
+    Busca los hijos que tiene un nodo padre
+    """
     for pad in padre.get('childrens'):
         print(padre.get('id'),".",pad.get('id'), pad.get('name'))
-        myTree.addNode(pad.get('id'), pad.get('name'), pad.get('party'),padre.get('id')) #NUEVA
+        myTree.add_node(pad.get('id'), pad.get('name'), pad.get('party'),padre.get('id')) #NUEVA
         #hasChilds(pad)
         hijos = str(pad.get('childrens'))
-        if(hijos != "[]"):
-            _buscarHijos(pad)
+        if hijos != "[]":
+            _buscar_hijos(pad)
 
 def update():
-    
+    """Update"""
     print("\n")
     print ("----Level Order----")
-    myTree.levelOrder(myTree.root)
-
+    myTree.level_order(myTree.root)
 
     print("\n\n")
     print ("----Preorder----")
-    myTree.preOrder(myTree.root)
+    myTree.pre_order(myTree.root)
 
     print("\n\n")
     print ("----Inorder----")
-    myTree.inOrder(myTree.root)
+    myTree.in_order(myTree.root)
 
 
     print("\n\n")
     print ("----Posorde")
-    myTree.posOrder(myTree.root)
+    myTree.pos_order(myTree.root)
 
     print("\n")
     print ("----Longer Path----")
-    myTree.longerPath(myTree.root)
+    myTree.longer_path(myTree.root)
 
     print("\n")
     print ("----Complete Tree----")
-    myTree.completeTree(myTree.root)
-    
+    myTree.complete_tree(myTree.root)
+
     print("\n")
     print ("----Full Tree----")
-    myTree.fullTree(myTree.root)
+    myTree.full_tree(myTree.root)
 
-ruta = "data/formatJSON.json"
-cargarDatos(ruta)
+RUTA = "data/formatJSON.json"
+cargar_datos(RUTA)
 update()
